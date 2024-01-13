@@ -15,17 +15,22 @@ contract Token{
     mapping(address => uint256) public balanceOf;
     //Send tokens 
 
-    constructor(string memory _name, string memory _symbol, uint256 _totalSupply) {
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        uint256 _totalSupply
+        ) {
         name = _name;
         symbol = _symbol;
         totalSupply = _totalSupply * (10**decimals);
         balanceOf [msg.sender] = totalSupply;
     }
     
-    function transfer(address _to, uint256 _value) public return (bool success){
+    function transfer(address _to, uint256 _value) public 
+    returns (bool success){
         //Deducts token from spender 
-        balanceOf[msg.sender] =  balanceOf[msg.sender] - _value;
+    balanceOf[msg.sender] =  balanceOf[msg.sender] - _value;
         //Credit tokens to receiver
-      balanceOf[_to]  = balanceOf[_to] + _value;
+    balanceOf[_to]  = balanceOf[_to] + _value;
     }
 }
