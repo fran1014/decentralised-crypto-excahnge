@@ -9,6 +9,7 @@ contract Exchange{
   mapping(address => mapping(address => uint256)) public tokens;
   mapping(uint256 => _Order ) public orders;
   uint256 public orderCount;
+  mapping (uint256 => bool) public orderCancelled; //true or false (boolean/bool)
 
   //Orders mapping
 
@@ -24,6 +25,17 @@ contract Exchange{
     address user,
     uint256 amount,
     uint256 balance
+  );
+
+  event Cancel(
+    uint256 id,
+    address user,
+    address tokenGet,
+    uint256 amountGet,
+    address tokenGive,
+    uint256 amountGive,
+    uint256 timestamp
+
   );
 
   event Order(
@@ -126,6 +138,34 @@ orders[orderCount]= _Order(
     _amountGive,
     block.timestamp
   );
+}
+
+function cancelOrder(uint256 _id) public{
+  //Fecthing the order
+  _Order storage _order =  orders[_id];
+
+   //Ensure the caller if the function if the owner of the order
+  require(address(_order.user) == msg.sender);
+
+  //Order must exist 
+  require(_order.id == _id);
+
+  //Cancel the order
+  orderCancelled[_id] = true;
+
+ 
+
+  //Emit event
+  emit Cancel(
+    _order.id,
+    msg.sender,
+    _order.tokenGet,
+    _order.amountGet,
+    _order.tokenGive,
+    _order.amountGive,
+    block.timestamp
+  );
+
 }
 
 }
