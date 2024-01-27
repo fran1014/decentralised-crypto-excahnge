@@ -260,13 +260,15 @@ function App() {
     const { chainId } = await provider.getNetwork();
     console.log(chainId);
 
-    //Token Smartk Contract
+    //Token Smart Contract
     const token = new ethers.Contract(
       '0x5FbDB2315678afecb367f032d93F642f64180aa3',
       TOKEN_ABI,
       provider
     );
     console.log(token.address);
+    const symbol = await token.symbol();
+    console.log(symbol);
   };
 
   useEffect(() => {
