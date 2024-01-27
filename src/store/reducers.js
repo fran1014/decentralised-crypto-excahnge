@@ -19,3 +19,18 @@ export const provider = (state = {}, action) => {
       return state;
   }
 };
+
+export const tokens = (state = { loaded: false, contract: null }, action) => {
+  switch (action.type) {
+    case 'TOKEN_LOADED':
+      return {
+        ...state,
+        loaded: true,
+        contract: action.token,
+        symbol: action.symbol,
+      };
+
+    default:
+      return state;
+  }
+};
