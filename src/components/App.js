@@ -32,6 +32,13 @@ function App() {
       loadAccount(provider, dispatch);
     });
 
+    const networkConfig = config[chainId];
+
+    if (!networkConfig || !networkConfig.Token || !networkConfig.mETH) {
+      console.error(`No configuration found for chainId: ${chainId}`);
+      return;
+    }
+
     // Load token smart contracts
     const Token = config[chainId].Token;
     const mETH = config[chainId].mETH;

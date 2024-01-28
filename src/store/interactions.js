@@ -1,6 +1,6 @@
 import { ethers } from 'ethers';
 import TOKEN_ABI from '../abis/Token.json';
-import EXCHANGE_ABI from '../abis/Token.json';
+import EXCHANGE_ABI from '../abis/Exchange.json';
 
 export const loadProvider = (dispatch) => {
   const connection = new ethers.providers.Web3Provider(window.ethereum);
@@ -11,7 +11,6 @@ export const loadProvider = (dispatch) => {
 
 export const loadNetwork = async (provider, dispatch) => {
   const { chainId } = await provider.getNetwork();
-
   dispatch({ type: 'NETWORK_LOADED', chainId });
 
   return chainId;
@@ -27,7 +26,8 @@ export const loadAccount = async (provider, dispatch) => {
 
   let balance = await provider.getBalance(account);
   balance = ethers.utils.formatEther(balance);
-  dispatch({ type: 'ETHER_BALANCED_LOADED', balance });
+
+  dispatch({ type: 'ETHER_BALANCE_LOADED', balance });
 
   return account;
 };
