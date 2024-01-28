@@ -7,7 +7,8 @@ import {
   loadProvider,
   loadNetwork,
   loadAccount,
-  loadToken,
+  loadTokens,
+  loadExchange,
 } from '../store/interactions';
 
 function App() {
@@ -20,8 +21,17 @@ function App() {
     const chainId = await loadNetwork(provider, dispatch);
 
     //Token Smart Contract
+    const Token = config[chainId].Token;
+    const mETH = config[chainId].mETH;
+    await loadTokens(
+      provider,
+      [Token.address, config[chainId].mETH.address],
+      dispatch
+    );
 
-    await loadToken(provider, config[chainId].Token.address, dispatch);
+    // Load exchange contract
+    const exchangeConfig = config[chainId].exchange;
+    await loadExchange(provider, exchangeConfig.address, dispatch);
   };
 
   useEffect(() => {
