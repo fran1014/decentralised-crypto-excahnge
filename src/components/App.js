@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-
 import config from '../config.json';
 
 import {
@@ -15,37 +14,42 @@ import Navbar from './Navbar';
 
 function App() {
   const dispatch = useDispatch();
-  const loadBlockChainData = async () => {
-    //Connect ethers to Blockchain
+
+  const loadBlockchainData = async () => {
+    // Connect Ethers to blockchain
     const provider = loadProvider(dispatch);
 
-    //Fetch current network´s chainId (e.g hardhat:31337 , kovan:42)
+    // Fetch current network's chainId (e.g. hardhat: 31337, kovan: 42)
     const chainId = await loadNetwork(provider, dispatch);
 
-    //Fetch current amoutn and balance from metamask
-    await loadAccount(provider, dispatch);
+    // Reload page when network changes
+    window.ethereum.on('chainChanged', () => {
+      window.location.reload();
+    });
 
-    //Load token Smart Contract
+    // Fetch current account & balance from Metamask when changed
+    window.ethereum.on('accountsChanged', () => {
+      loadAccount(provider, dispatch);
+    });
+
+    // Load token smart contracts
     const Token = config[chainId].Token;
     const mETH = config[chainId].mETH;
-    await loadTokens(
-      provider,
-      [Token.address, config[chainId].mETH.address],
-      dispatch
-    );
+    await loadTokens(provider, [Token.address, mETH.address], dispatch);
 
-    // Load exchange contract
+    // Load exchange smart contract
     const exchangeConfig = config[chainId].exchange;
     await loadExchange(provider, exchangeConfig.address, dispatch);
   };
 
   useEffect(() => {
-    loadBlockChainData();
+    loadBlockchainData();
   });
 
   return (
     <div>
       <Navbar />
+
       <main className="exchange grid">
         <section className="exchange__section--left grid">
           {/* Markets */}
