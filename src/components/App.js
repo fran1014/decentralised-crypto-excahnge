@@ -35,7 +35,6 @@ function App() {
     const networkConfig = config[chainId];
 
     if (!networkConfig || !networkConfig.Token || !networkConfig.mETH) {
-      console.error(`No configuration found for chainId: ${chainId}`);
       return;
     }
 
