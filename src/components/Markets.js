@@ -25,12 +25,12 @@ const Markets = () => {
           <option
             value={`${config[chainId].Token.address},${config[chainId].mETH.address}`}
           >
-            DApp / mETH
+            Token / mETH
           </option>
           <option
             value={`${config[chainId].Token.address},${config[chainId].mDAI.address}`}
           >
-            DApp / mDAI
+            Token / mDAI
           </option>
         </select>
       ) : (
