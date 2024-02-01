@@ -36,7 +36,9 @@ export const loadAccount = async (provider, dispatch) => {
 export const loadTokens = async (provider, addresses, dispatch) => {
   let token, symbol;
 
+  console.log(addresses);
   token = new ethers.Contract(addresses[0], TOKEN_ABI, provider);
+
   symbol = await token.symbol();
 
   dispatch({ type: 'TOKEN_1_LOADED', token, symbol });
