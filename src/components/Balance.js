@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import dapp from '../assets/dapp.svg';
+import eth from '../assets/eth.svg';
 import { loadBalances, transferTokens } from '../store/interactions';
-import { transcode } from 'buffer';
 
 const Balance = () => {
   const [token1TransferAmount, setToken1TransferAmount] = useState(0);
@@ -68,14 +68,14 @@ const Balance = () => {
           <img src={dapp} alt="Token Logo" /> {symbols && symbols[0]}
         </p>
         <p>
-          <small>Exchange</small>
-          <br />
-          {exchangeBalances && exchangeBalances[0]}
-        </p>
-        <p>
           <small>Wallet</small>
           <br />
           {tokenBalances && tokenBalances[0]}
+        </p>
+        <p>
+          <small>Exchange</small>
+          <br />
+          {exchangeBalances && exchangeBalances[0]}
         </p>
 
         <form onSubmit={(e) => depositHandler(e, tokens[0])}>
@@ -100,6 +100,21 @@ const Balance = () => {
 
       <div className="exchange__transfers--form">
         <div className="flex-between"></div>
+        <p>
+          <small>Token</small>
+          <br />
+          <img src={eth} alt="Token Logo" /> {symbols && symbols[1]}
+        </p>
+        <p>
+          <small>Wallet</small>
+          <br />
+          {tokenBalances && tokenBalances[1]}
+        </p>
+        <p>
+          <small>Exchange</small>
+          <br />
+          {exchangeBalances && exchangeBalances[1]}
+        </p>
 
         <form>
           <label htmlFor="token1"></label>
