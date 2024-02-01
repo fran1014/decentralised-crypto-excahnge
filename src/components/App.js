@@ -8,6 +8,7 @@ import {
   loadAccount,
   loadTokens,
   loadExchange,
+  subscribeToEvents,
 } from '../store/interactions';
 
 import Navbar from './Navbar';
@@ -47,7 +48,14 @@ function App() {
 
     // Load exchange smart contract
     const exchangeConfig = config[chainId].exchange;
-    await loadExchange(provider, exchangeConfig.address, dispatch);
+    const exchange = await loadExchange(
+      provider,
+      exchangeConfig.address,
+      dispatch
+    );
+
+    //Listen to events
+    subscribeToEvents(exchange, dispatch);
   };
 
   useEffect(() => {
