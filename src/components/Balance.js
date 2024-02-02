@@ -61,22 +61,23 @@ const Balance = () => {
       {/* Deposit/Withdraw Component 1 (DApp) */}
 
       <div className="exchange__transfers--form">
-        <div className="flex-between"></div>
-        <p>
-          <small>Token</small>
-          <br />
-          <img src={dapp} alt="Token Logo" /> {symbols && symbols[0]}
-        </p>
-        <p>
-          <small>Wallet</small>
-          <br />
-          {tokenBalances && tokenBalances[0]}
-        </p>
-        <p>
-          <small>Exchange</small>
-          <br />
-          {exchangeBalances && exchangeBalances[0]}
-        </p>
+        <div className="flex-between">
+          <p>
+            <small>Token</small>
+            <br />
+            <img src={dapp} alt="Token Logo" /> {symbols && symbols[0]}
+          </p>
+          <p>
+            <small>Wallet</small>
+            <br />
+            {tokenBalances && tokenBalances[0]}
+          </p>
+          <p>
+            <small>Exchange</small>
+            <br />
+            {exchangeBalances && exchangeBalances[0]}
+          </p>
+        </div>
 
         <form onSubmit={(e) => depositHandler(e, tokens[0])}>
           <label htmlFor="token0">{symbols && symbols[0]} Amount</label>
