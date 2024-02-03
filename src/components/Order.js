@@ -1,9 +1,17 @@
 import { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { makeBuyOrder, makeSellOrder } from '../store/interactions';
 
 const Order = () => {
   const [isBuy, setIsBuy] = useState(true);
   const [amount, setAmount] = useState(0);
   const [price, setPrice] = useState(0);
+
+  const provider = useSelector((state) => state.provider.connection);
+  const tokens = useSelector((state) => state.tokens.contracts);
+  const exchange = useSelector((state) => state.exchange.contract);
+
+  const dispatch = useDispatch();
 
   const buyRef = useRef(null);
   const sellRef = useRef(null);
@@ -20,9 +28,19 @@ const Order = () => {
     }
   };
 
-  const buyHandler = (e) => {};
+  const buyHandler = (e) => {
+    e.preventDefault();
+    makeBuyOrder(provider, exchange, tokens, { amount, price }, dispatch);
+    setAmount(0);
+    setPrice(0);
+  };
 
-  const sellHandler = (e) => {};
+  const sellHandler = (e) => {
+    e.preventDefault();
+    makeSellOrder(provider, exchange, tokens, { amount, price }, dispatch);
+    setAmount(0);
+    setPrice(0);
+  };
 
   return (
     <div className="component exchange__orders">
@@ -39,17 +57,31 @@ const Order = () => {
       </div>
 
       <form onSubmit={isBuy ? buyHandler : sellHandler}>
+        {isBuy ? (
+          <label htmlFor="amount"> Buy Amount </label>
+        ) : (
+          <label htmlFor="amount"> Sell Amount</label>
+        )}
+
         <input
           type="text"
           id="amount"
           placeholder="0.0000"
+          value={amount === 0 ? '' : amount}
           onChange={(e) => setAmount(e.target.value)}
         />
+
+        {isBuy ? (
+          <label htmlFor="price"> Buy Price </label>
+        ) : (
+          <label htmlFor="price"> Sell Price</label>
+        )}
 
         <input
           type="text"
           id="price"
           placeholder="0.0000"
+          value={price === 0 ? '' : price}
           onChange={(e) => setPrice(e.target.value)}
         />
 
