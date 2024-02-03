@@ -5,6 +5,7 @@ import eth from '../assets/eth.svg';
 import { loadBalances, transferTokens } from '../store/interactions';
 
 const Balance = () => {
+  const [isDeposit, setIsDeposit] = useState(true);
   const [token1TransferAmount, setToken1TransferAmount] = useState(0);
   const [token2TransferAmount, setToken2TransferAmount] = useState(0);
   const dispatch = useDispatch();
@@ -29,9 +30,11 @@ const Balance = () => {
     if (e.target.className !== depositRef.current.className) {
       e.target.className = 'tab tab--active';
       depositRef.current.className = 'tab';
+      setIsDeposit(false);
     } else {
       e.target.className = 'tab tab--active';
       withdrawRef.current.className = 'tab';
+      setIsDeposit(true);
     }
   };
 
@@ -124,7 +127,7 @@ const Balance = () => {
           />
 
           <button className="button" type="submit">
-            <span>Deposit</span>
+            {isDeposit ? <span>Deposit</span> : <span>Withdraw</span>}
           </button>
         </form>
       </div>
@@ -163,7 +166,7 @@ const Balance = () => {
           />
 
           <button className="button" type="submit">
-            <span>Deposit</span>
+            {isDeposit ? <span>Deposit</span> : <span>Withdraw</span>}
           </button>
         </form>
       </div>
