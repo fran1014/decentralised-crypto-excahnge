@@ -122,3 +122,14 @@ const decorateOrderBookOrder = (order, tokens) => {
     orderFillAction: orderType === 'buy' ? 'sell' : 'buy',
   };
 };
+
+//-----------------
+//PRICECHART
+
+export const orderBookSelector = createSelector(
+  openOrders,
+  tokens,
+  (orders, tokens) => {
+    if (!tokens[0] || !tokens[1]) {
+      return;
+    }´```´
