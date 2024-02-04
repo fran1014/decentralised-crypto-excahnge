@@ -85,6 +85,9 @@ export const filledOrdersSelector = createSelector(
     //Decorate the orders
     orders = decorateFilledOrders(orders, tokens);
 
+    //Sort orders by date descending for display
+    orders = orders.sort((a, b) => b.timestamp - a.timestamp);
+
     return orders;
   }
 );
