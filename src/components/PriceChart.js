@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts';
 
 import arrowDown from '../assets/down-arrow.svg';
 import arrowUp from '../assets/up-arrow.svg';
-import { options, defaulSeries } from './PriceChart.config';
+import { options, defaultSeries } from './PriceChart.config';
 
 import { priceChartSelector } from '../store/selectors';
 import Banner from './Banner';
@@ -39,7 +39,7 @@ const PriceChart = () => {
         <Chart
           type="candlestick"
           options={options}
-          series={priceChart ? priceChart.series : defaulSeries}
+          series={priceChart ? priceChart.series : defaultSeries}
           width="100%"
           height="100%"
         />
