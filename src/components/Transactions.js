@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { myOpenOrdersSelector } from '../store/selectors';
 import sort from '../assets/sort.svg';
@@ -6,6 +7,20 @@ import Banner from './Banner';
 const Transactions = () => {
   const symbols = useSelector((state) => state.tokens.symbols);
   const myOpenOrders = useSelector(myOpenOrdersSelector);
+
+  const tradeRef = useRef(null);
+  const orderRef = useRef(null);
+
+  const tabHandler = (e) => {
+    if (e.target.className !== orderRef.current.className) {
+      e.target.className = 'tab tab--active';
+      orderRef.current.className = 'tab';
+    } else {
+      e.target.className = 'tab tab--active';
+      tradeRef.current.className = 'tab';
+    }
+  };
+
   return (
     <div className="component exchange__transactions">
       <div>
@@ -13,8 +28,16 @@ const Transactions = () => {
           <h2>My Orders</h2>
 
           <div className="tabs">
-            <button className="tab tab--active">Orders</button>
-            <button className="tab">Trades</button>
+            <button
+              onClick={tabHandler}
+              ref={orderRef}
+              className="tab tab--active"
+            >
+              Orders
+            </button>
+            <button onClick={tabHandler} ref={tradeRef} className="tab">
+              Trades
+            </button>
           </div>
         </div>
 
@@ -53,36 +76,41 @@ const Transactions = () => {
         )}
       </div>
 
-      {/* <div> */}
-      {/* <div className='component__header flex-between'> */}
-      {/* <h2>My Transactions</h2> */}
+      <div>
+        <div className="component__header flex-between">
+          <h2>My Transactions</h2>
 
-      {/* <div className='tabs'> */}
-      {/* <button className='tab tab--active'>Orders</button> */}
-      {/* <button className='tab'>Trades</button> */}
-      {/* </div> */}
-      {/* </div> */}
+          <div className="tabs">
+            <button
+              onClick={tabHandler}
+              ref={orderRef}
+              className="tab tab--active"
+            >
+              Orders
+            </button>
+            <button onClick={tabHandler} ref={tradeRef} className="tab">
+              Trades
+            </button>
+          </div>
+        </div>
 
-      {/* <table> */}
-      {/* <thead> */}
-      {/* <tr> */}
-      {/* <th></th> */}
-      {/* <th></th> */}
-      {/* <th></th> */}
-      {/* </tr> */}
-      {/* </thead> */}
-      {/* <tbody> */}
-
-      {/* <tr> */}
-      {/* <td></td> */}
-      {/* <td></td> */}
-      {/* <td></td> */}
-      {/* </tr> */}
-
-      {/* </tbody> */}
-      {/* </table> */}
-
-      {/* </div> */}
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
