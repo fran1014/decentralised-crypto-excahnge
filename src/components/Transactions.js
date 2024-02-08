@@ -7,7 +7,6 @@ import {
 import sort from '../assets/sort.svg';
 import { cancelOrder } from '../store/interactions';
 import Banner from './Banner';
-import { exchange } from '../store/reducers';
 
 const Transactions = () => {
   const [showMyOrders, setShowMyOrders] = useState(true);

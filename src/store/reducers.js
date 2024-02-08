@@ -139,7 +139,7 @@ export const exchange = (state = DEFAULT_EXCHANGE_STATE, action) => {
         },
         cancelledOrders: {
           ...state.cancelledOrders,
-          data: [...state.cancelledOrders.data, action.orderId],
+          data: [...state.cancelledOrders.data, action.order],
         },
         event: [action.event, ...state.events],
       };
