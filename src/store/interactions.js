@@ -96,7 +96,7 @@ export const subscribeToEvents = (exchange, dispatch) => {
   exchange.on('Deposit', (token, user, amount, balance, event) => {
     dispatch({ type: 'TRANSFER_SUCCESS', event });
 
-    exchange.on('Wtihdraw', (token, user, amount, balance, event) => {
+    exchange.on('Withdraw', (token, user, amount, balance, event) => {
       dispatch({ type: 'TRANSFER_SUCCESS', event });
     });
 
