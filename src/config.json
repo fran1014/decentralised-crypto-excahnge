@@ -1,5 +1,5 @@
 {
-  "11155111": {
+  "31337": {
     "exchange": {
       "address": "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"
     },
@@ -11,6 +11,21 @@
     },
     "mDAI": {
       "address": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+    },
+    "explorerURL": "#"
+  },
+  "11155111": {
+    "exchange": {
+      "address": "0x584c73B80FD492490F2e75DAA54e571B2014dd2F"
+    },
+    "Token": {
+      "address": "0x9195B6Fdf707aF8d00FE5edf6441734a7A0F9445"
+    },
+    "mETH": {
+      "address": "0x17774Ca86530F8Fd8C68702d8f4eabccD911e158"
+    },
+    "mDAI": {
+      "address": "0xE3Ba2EC4747C8f02aCb6ef0f8C2C4Db4508cFc66"
     },
     "explorerURL": "https://sepolia.etherscan.io/"
   }
